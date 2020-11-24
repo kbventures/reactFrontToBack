@@ -1,5 +1,7 @@
 // import React, {Component} from 'react';
 import React from 'react';
+import Navbar from './components/layout/Navbar'
+
 import './App.css';
 
 
@@ -43,24 +45,37 @@ import './App.css';
 // }
 
 
-// expression example
+// expression examples
+
+// class App extends React.Component {
+
+//   fooPartOfClass = () => 'Barssss';
+
+//   render() {
+//     const name = 'John Doe';
+//     const foo = () => 'bar';
+//     const loading = false;
+//     const showName = true;
+//     return (
+//       <div className="App">
+//         <h1>Hello {name.toUpperCase()}</h1>
+//         <h1>Hello {1 + 1}</h1>
+//         <h1>Hello {foo()}</h1>
+//         <h1>Hello {this.fooPartOfClass()}</h1>
+//         {loading ? <h4>Loading...</h4> : <h1>Hello {showName ? name : null}</h1>}
+//         {loading ? <h4>Loading...</h4> : <h1>Hello {showName && name}</h1>}
+//       </div>
+//     );
+//   }
+// }
+
+// Props
 
 class App extends React.Component {
-
-  fooPartOfClass = () => 'Barssss';
-
   render() {
-    const name = 'John Doe';
-    const foo = () => 'bar';
-    const loading = false;
-    const showName = true;
     return (
-      <div className="App">
-        <h1>Hello {name.toUpperCase()}</h1>
-        <h1>Hello {1 + 1}</h1>
-        <h1>Hello {foo()}</h1>
-        <h1>Hello {this.fooPartOfClass()}</h1>
-        {loading ? <h4>Loading...</h4> : <h1>Hello {showName ? name : null}</h1>}
+      <div className='App'>
+       <Navbar title='Github Finder' icon='fab fa-github'/>
       </div>
     );
   }
