@@ -19,21 +19,19 @@ class App extends React.Component {
 
   // Render and componentDidMount are lifecyle method
 
+
   async componentDidMount(){
 
-    // we can't change the state this way
-    // this.state.loading = true; for class components
-
-    /*
-    You can and should use this.setState() in only these React lifecycle
-    methods: componentDidMount, componentDidUpdate and 
-    componentWillReceiveProps. You can also set it in the componentWillMount
-    method, but it’s recommend to use the constructor instead.
-    */
+  const github = axios.create({
+    baseURL: 'https://api/github.com',
+    timeout: 1000,
+    headers: { Authorization: process.env.REACT_APP_GITHUB_TOKEN}
+  })
 
     this.setState({loading:true});
 
-    const res = await axios.get('https://api.github.com/users');
+    const res = await github.get('https://api.github.com/users');
+
     
     this.setState({users: res.data, loading: false});
   }
