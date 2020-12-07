@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 // Class based component
-
+// https://github.com/bushblade/RFTB2019_GitHub_Finder/tree/refactor#updates-since-course-published
 
 class App extends React.Component {
 
@@ -21,20 +21,41 @@ class App extends React.Component {
   // Render and componentDidMount are lifecyle method
 
 
-  async componentDidMount(){
+  // async componentDidMount(){
 
-  const github = axios.create({
-    baseURL: 'https://api/github.com',
-    timeout: 1000,
-    headers: { Authorization: process.env.REACT_APP_GITHUB_TOKEN}
-  })
+  //   this.setState({loading:true});
+
+  // const github = axios.create({
+  //   baseURL: 'https://api/github.com',
+  //   timeout: 1000,
+  //   headers: { Authorization: process.env.REACT_APP_GITHUB_TOKEN}
+  // })
+
+  //   const res = await github.get('https://api.github.com/users');
+
+    
+  //   this.setState({users: res.data, loading: false});
+  // }
+
+    // Search Github Users
+  // searchUsers = text => {
+  //   console.log(text);
+  // }
+
+  searchUsers = async text => {
 
     this.setState({loading:true});
 
-    const res = await github.get('https://api.github.com/users');
+    const github = axios.create({
+      baseURL: 'https://api/github.com',
+      timeout: 1000,
+      headers: { Authorization: process.env.REACT_APP_GITHUB_TOKEN}
+    })
+
+    const res = await github.get(`https://api.github.com/search/users?q=${text}`);
 
     
-    this.setState({users: res.data, loading: false});
+    this.setState({users: res.data.items, loading: false});
   }
 
   render() {
@@ -42,7 +63,7 @@ class App extends React.Component {
       <div className='App'>
        <Navbar title='Github Finder' icon='fab fa-github'/>
        <div className="container">
-        <Search />
+        <Search searchUsers={this.searchUsers}/>
         <Users loading={this.state.loading} users={this.state.users} />
        </div>
       </div>

@@ -1,15 +1,25 @@
 //rce class basec component code snippet
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
 export class Search extends Component {
     state ={
         text:''
     }
+    
+    // Code snippet short cut ptfr
+    static propTypes = {
+        searchUsers: PropTypes.func.isRequired
+    }
 
     onSubmit = (e) => {
         e.preventDefault();
         console.log(this.state.text);
+        // Pass up search input to App.js through props
+        this.props.searchUsers(this.state.text);
+        //Clear Form
+        this.setState({text:''});
     }
 
     // This works fine if there is only one input
@@ -25,7 +35,7 @@ export class Search extends Component {
     render() {
         return (
             <div>
-                <form action="form">
+                <form action="form" onSubmit={this.onSubmit}>
                     <input type="text" name="text" placeholder="Search Users..." value={this.state.text} onChange={this.onChange}/>
                     <input type="submit" value="Search" className="btn btn-dark btn-block"/>
                 </form>
