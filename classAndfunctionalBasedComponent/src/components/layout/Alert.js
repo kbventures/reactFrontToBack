@@ -1,12 +1,15 @@
 import React from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faInfoCircle} from '@fortawesome/free-solid-svg-icons';
+
 
 
 const Alert = ({alert}) => {
     return (
         alert !== null && (
         <div className={`alert alert-${alert.type}`}>
-            <i classname="fas fa-info-circle" /> { alert.msg }
+            <FontAwesomeIcon icon={faInfoCircle} color="orange"/> { alert.msg }
         </div>
     )
     )
