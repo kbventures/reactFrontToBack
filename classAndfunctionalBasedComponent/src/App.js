@@ -1,9 +1,10 @@
 // import React, {Component} from 'react';
+// https://github.com/bradtraversy/github-finder
 import React from 'react';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users'
 import Search from './components/users/Search';
-
+import Alert from './components/layout/Alert';
 import './App.css';
 import axios from 'axios';
 
@@ -15,32 +16,10 @@ class App extends React.Component {
 
   state = {
     users: [],
-    loading: false
+    loading: false,
+    alert: null
   }
 
-  // Render and componentDidMount are lifecyle method
-
-
-  // async componentDidMount(){
-
-  //   this.setState({loading:true});
-
-  // const github = axios.create({
-  //   baseURL: 'https://api/github.com',
-  //   timeout: 1000,
-  //   headers: { Authorization: process.env.REACT_APP_GITHUB_TOKEN}
-  // })
-
-  //   const res = await github.get('https://api.github.com/users');
-
-    
-  //   this.setState({users: res.data, loading: false});
-  // }
-
-    // Search Github Users
-  // searchUsers = text => {
-  //   console.log(text);
-  // }
 
   searchUsers = async text => {
 
@@ -61,6 +40,12 @@ class App extends React.Component {
 
     // Clear users from state
   clearUsers = () => this.setState({users: [], loading: false});
+
+  setAlert = (msg, type) => {
+    this.setState({alert:{msg, type}});
+
+    setTimeout(() => this.setState({ alert: null}), 5000);
+  };
   
 
   render() {
@@ -71,8 +56,14 @@ class App extends React.Component {
       <div className='App'>
        <Navbar title='Github Finder' icon='fab fa-github'/>
        <div className="container">
-        <Search searchUsers={this.searchUsers} clearUsers={this.clearUsers} showClear={
-          this.state.users.length > 0 ? true : false}/>
+       <Alert alert={this.state.alert}/>
+        <Search 
+          searchUsers={this.searchUsers}
+          clearUsers={this.clearUsers} 
+          showClear={
+          this.state.users.length > 0 ? true : false}
+          setAlert={this.setAlert}
+        />
         <Users loading={loading} users={users} />
        </div>
       </div>

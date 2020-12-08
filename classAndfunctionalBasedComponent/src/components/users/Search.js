@@ -12,16 +12,18 @@ export class Search extends Component {
     static propTypes = {
         searchUsers: PropTypes.func.isRequired,
         clearUsers: PropTypes.func.isRequired,
-        showClear: PropTypes.bool.isRequired
+        showClear: PropTypes.bool.isRequired,
+        setAlert: PropTypes.func.isRequired
     }
 
     onSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state.text);
-        // Pass up search input to App.js through props
+        if (this.state.text === ''){
+            this.props.setAlert('Please enter something', 'light');
+        } else {
         this.props.searchUsers(this.state.text);
-        //Clear Form
         this.setState({text:''});
+        }
     }
 
     // This works fine if there is only one input
