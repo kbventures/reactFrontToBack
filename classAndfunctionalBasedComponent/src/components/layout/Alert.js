@@ -9,7 +9,7 @@ const Alert = ({alert}) => {
     return (
         alert !== null && (
         <div className={`alert alert-${alert.type}`}>
-            <FontAwesomeIcon icon={faInfoCircle} color="orange"/> { alert.msg }
+            <FontAwesomeIcon icon={faInfoCircle} color="orange"/>{' '}{alert.msg }
         </div>
     )
     )
